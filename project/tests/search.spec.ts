@@ -14,7 +14,6 @@ test.describe.serial('Shoppers Stop - Search Functionality Tests', () => {
     await expect(await page.locator('.grid.justify-between a').first()).toBeVisible();
   });
 
-
   test('Search for an invalid product and verify “No Results” message', async ({ page }) => {
     await page.locator('input[placeholder="What are you looking for?"]').fill('asdhkjashd123');
     const search = await page.locator('.hidden.w-full.items-center input');
