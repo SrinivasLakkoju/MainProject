@@ -168,7 +168,12 @@ test.describe.serial("outer",async()=>{
         })
 
     })
-
+    test('6. Check “Help & Support” link in the header', async ({ page }) => {
+      const locator = page.getByText('Help & Support');
+      await expect(locator).toBeVisible();
+      await locator.click();
+      expect(await page.getByText('Help / Frequently Asked Questions')).toBeVisible();
+    });
 test.describe.serial("outer",async()=>{
     [
         {pageno:0},
