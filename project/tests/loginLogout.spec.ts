@@ -128,7 +128,9 @@ test.describe('Shoppers Stop - Account Functionality Tests', () => {
       
       await page2.getByLabel('Last Name').fill("Lakkoju");
 
-    //   await page2.getByText('Submit').nth(1).click();
+      //user enters captcha
+
+       await page2.getByText('Submit').nth(1).click();
 
     });
 
