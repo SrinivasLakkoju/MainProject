@@ -9,6 +9,28 @@ test.describe.serial('Shoppers Stop Homepage Tests', () => {
   test('Verify homepage loads successfully', async ({ page }) => {
     await expect(page).toHaveURL('shoppersstop.com/');
     await expect(page.locator('header')).toBeVisible();
+   });
+
+  test('Verify brands is not working', async ({ page }) => {
+    await page.getByText('Login').click();
+    await page.locator('input[type="text"]').nth(1).fill('srinivaslakkoju2002@gmail.com');
+    await page.getByText('PROCEED').click();
+    
+    const btnHandle = await page.locator('button:has-text("VERIFY OTP")').elementHandle();
+
+    if (btnHandle) {
+    await page.waitForFunction(
+        (btn) => !btn.hasAttribute('disabled'),
+        btnHandle
+    );
+    await btnHandle.click();
+    } else {
+    throw new Error('VERIFY OTP button not found');
+    }
+    await expect(page.getByText('BRANDS').first()).toBeVisible();
+    await page.getByText('BRANDS').first().hover();
+    await page.getByAltText('heart-plus').nth(3).click();
+    await expect(page.getByText('You have no favourite brands yet')).toBeVisible();
   });
 
   test('Verify main menu is visible (Men, Women', async ({ page }) => {
@@ -164,3 +186,4 @@ test.describe.serial("outer",async()=>{
 
     });
 });
+
